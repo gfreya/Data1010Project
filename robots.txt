@@ -1,1 +1,1 @@
-Sitemap: https://fastpages.fast.ai/sitemap.xml
+Sitemap: https://gfreya.github.io/Data1010Project/sitemap.xml
