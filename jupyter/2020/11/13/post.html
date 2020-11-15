@@ -4,12 +4,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
-<title>SVD(Singular Value Decomposition) and PCA(Principle Component Analysis) in Image Processing | My Data-Science Blog</title>
+<title>SVD(Singular Value Decomposition) and PCA(Principle Component Analysis) in Real-life Applications | My Data-Science Blog</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="SVD(Singular Value Decomposition) and PCA(Principle Component Analysis) in Image Processing" />
+<meta property="og:title" content="SVD(Singular Value Decomposition) and PCA(Principle Component Analysis) in Real-life Applications" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="Relationship between SVD and PCA &amp; Application in image processing." />
-<meta property="og:description" content="Relationship between SVD and PCA &amp; Application in image processing." />
+<meta name="description" content="Connections between SVD and PCA &amp; Real-life Applications." />
+<meta property="og:description" content="Connections between SVD and PCA &amp; Real-life Applications." />
 <link rel="canonical" href="https://gfreya.github.io/Data1010Project/jupyter/2020/11/13/post.html" />
 <meta property="og:url" content="https://gfreya.github.io/Data1010Project/jupyter/2020/11/13/post.html" />
 <meta property="og:site_name" content="My Data-Science Blog" />
@@ -17,7 +17,7 @@
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2020-11-13T00:00:00-06:00" />
 <script type="application/ld+json">
-{"description":"Relationship between SVD and PCA &amp; Application in image processing.","url":"https://gfreya.github.io/Data1010Project/jupyter/2020/11/13/post.html","@type":"BlogPosting","headline":"SVD(Singular Value Decomposition) and PCA(Principle Component Analysis) in Image Processing","dateModified":"2020-11-13T00:00:00-06:00","datePublished":"2020-11-13T00:00:00-06:00","image":"https://gfreya.github.io/Data1010Project/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://gfreya.github.io/Data1010Project/jupyter/2020/11/13/post.html"},"@context":"https://schema.org"}</script>
+{"description":"Connections between SVD and PCA &amp; Real-life Applications.","url":"https://gfreya.github.io/Data1010Project/jupyter/2020/11/13/post.html","@type":"BlogPosting","headline":"SVD(Singular Value Decomposition) and PCA(Principle Component Analysis) in Real-life Applications","dateModified":"2020-11-13T00:00:00-06:00","datePublished":"2020-11-13T00:00:00-06:00","image":"https://gfreya.github.io/Data1010Project/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://gfreya.github.io/Data1010Project/jupyter/2020/11/13/post.html"},"@context":"https://schema.org"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/Data1010Project/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://gfreya.github.io/Data1010Project/feed.xml" title="My Data-Science Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data1010Project/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -72,13 +72,13 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">SVD(Singular Value Decomposition) and PCA(Principle Component Analysis) in Image Processing</h1><p class="page-description">Relationship between SVD and PCA & Application in image processing.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-13T00:00:00-06:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">SVD(Singular Value Decomposition) and PCA(Principle Component Analysis) in Real-life Applications</h1><p class="page-description">Connections between SVD and PCA & Real-life Applications.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-11-13T00:00:00-06:00" itemprop="datePublished">
         Nov 13, 2020
       </time>
        • <span class="read-time" title="Estimated read time">
     
     
-      15 min read
+      24 min read
     
 </span></p>
 
@@ -130,11 +130,20 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h3"><a href="#Mathematical-Example-of-PCA">Mathematical Example of PCA </a></li>
 </ul>
 </li>
-<li class="toc-entry toc-h2"><a href="#Relationship-between-SVD-and-PCA">Relationship between SVD and PCA </a>
+<li class="toc-entry toc-h2"><a href="#Connections-between-SVD-and-PCA">Connections between SVD and PCA </a>
 <ul>
-<li class="toc-entry toc-h4"><a href="#Write-the-mathematical-process-in-relation-csdn.">Write the mathematical process in relation csdn. </a></li>
+<li class="toc-entry toc-h3"><a href="#Mathematical-Relations-behind-PCA-and-SVD">Mathematical Relations behind PCA and SVD </a></li>
+<li class="toc-entry toc-h3"><a href="#Implementation-of-PCA-Based-on-SVD">Implementation of PCA Based on SVD </a></li>
 </ul>
 </li>
+<li class="toc-entry toc-h2"><a href="#Real-life-Applications-of-SVD-and-PCA">Real-life Applications of SVD and PCA </a>
+<ul>
+<li class="toc-entry toc-h3"><a href="#A-Simple-Matrix-Example">A Simple Matrix Example </a></li>
+<li class="toc-entry toc-h3"><a href="#Iris-Dataset-Examples">Iris Dataset Examples </a></li>
+<li class="toc-entry toc-h3"><a href="#Image-Processing-Examples">Image Processing Examples </a></li>
+</ul>
+</li>
+<li class="toc-entry toc-h2"><a href="#Summary">Summary </a></li>
 </ul><!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
@@ -144,23 +153,6 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-julia"><pre><span></span><span class="k">using</span> <span class="n">LinearAlgebra</span><span class="p">,</span> <span class="n">Statistics</span><span class="p">,</span> <span class="n">StatsBase</span><span class="p">;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -221,9 +213,13 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We first review the definitions of eigenvalues and eigenvectors as follows: $Ax = \lambda x$. In this formula, $A$ is an <em>n</em> $\times$ <em>n</em> real symmetric matrix, and $x$ is a vector of dimension n, then we say that $\lambda$ is an eigenvalue of matrix $A$, and $x$ is the eigenvector corresponding to the eigenvalue of matrix $A$. After we know the according eigenvalues and eigenvectors, we can do eigendecompositionn to the matrix $A$. Now we have n eigenvalues of matrix $A$: $\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n$ and the according eigenvectors {$w_1,w_2,\cdots,w_n$}, if the n eigenvectors are linearly independent, then the matrix can be eigendecomposed as $A = W\Sigma W^{-1}$.</p>
-<p>$W$ is an <em>n</em> $\times$ <em>n</em> matrix composed of the n eigenvectors and $\Sigma$ is the <em>n</em> $\times$ <em>n</em> matrix with n eigenvalues on its main diagonal. Generaly, we will normalize the n eigenvectors in matrix $W$, namely satisefying $||w_i||_2 = 1$, or $w_i^T w_i = 1$. At this time, the eigenvectors of $W$ are the standard orthogonal bases, satisefying $W^TW=I$, namely $W^T = W^{-1}$. Then we can rewrite the eigendecomposition of matrix A: $A = W\Sigma W^T$.</p>
-<p>To clarify one important point of eigendecomposition: the matrix $A$ must be a square matrix. So another question comes up: if the matrix $A$ is not a square matrix which means that the numbers of columns and rows are not the same, can we decompose the matrix $A$? The answer is definitely yes, and it just introduces the main topic SVD(singular value decomposition).</p>
+<p>We first review the definitions of eigenvalues and eigenvectors as follows: $Ax = \lambda x$. In this formula, $A$ is an <em>n</em> $\times$ <em>n</em> real symmetric matrix, and $x$ is a vector of dimension n, then we say that $\lambda$ is an eigenvalue of matrix $A$, and $x$ is the eigenvector corresponding to the eigenvalue of matrix $A$. After we know the according eigenvalues and eigenvectors, we can do eigendecompositionn to the matrix $A$. Now we have n eigenvalues of matrix $A$: $\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n$ and the according eigenvectors {$v_1,v_2,\cdots,v_n$}, if the n eigenvectors are linearly independent, then the matrix can be eigendecomposed as $A = V\Lambda V^{-1}$.</p>
+<p>$V$ is an <em>n</em>$\times$<em>n</em> matrix composed of the n eigenvectors and $\Lambda$ is the <em>n</em>$\times$<em>n</em> matrix with n eigenvalues on its main diagonal. Generaly, we will normalize the n eigenvectors in matrix $V$, namely satisefying $||v_i||_2 = 1$, or $v_i^T v_i = 1$. At this time, the eigenvectors of $V$ are the standard orthogonal bases, satisefying $V^TV=I$, namely $V^T = V^{-1}$. Then we can rewrite the eigendecomposition of matrix $A$: $A = V\Lambda V^T$.</p>
+<p>If you want to learn more about the process of eigendecompsition, please refer to</p>
+<blockquote>
+<p>DataGymnasia:<a href="https://mathigon.org/course/linear-algebra/eigenanalysis">https://mathigon.org/course/linear-algebra/eigenanalysis</a>
+To clarify one important point of eigendecomposition: the matrix $A$ must be a square matrix. So another question comes up: if the matrix $A$ is not a square matrix which means that the numbers of columns and rows are not the same, can we decompose the matrix $A$? The answer is definitely yes, and it just introduces the main topic SVD(singular value decomposition).</p>
+</blockquote>
 
 </div>
 </div>
@@ -240,7 +236,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>SVD is another method to decompose a matrix. Different from the eigen decomposition, SVD does not require the decomposed matrix to be the square one. Assume we have an <em>m</em> $\times$ <em>n</em> matrix A, then we can define SVD of matrix $A$ as: $A = U\Sigma V^T$. The matrix $U$ is an <em>m</em> $\times$ <em>m</em> matrix. The matrix $\Sigma$ is an <em>m</em> $\times$ <em>n</em> matrix with singular values on the main diagonal. The matrix $V$ is an <em>n</em> $\times$ <em>n</em> matrix. The matrix $U$ and $V$ satisefy $U^TU=I$ and $V^TV=I$. The following image can express the decomposition clearly.</p>
+<p>SVD is another method to decompose a matrix. Different from the eigen decomposition, SVD does not require the decomposed matrix to be the square one. Assume we have an <em>m</em>$\times$<em>n</em> matrix A, then we can define SVD of matrix $A$ as: $A = U\Sigma V^T$. The matrix $U$ is an <em>m</em>$\times$<em>m</em> matrix. The matrix $\Sigma$ is an <em>m</em>$\times$<em>n</em> matrix with singular values on the main diagonal. The matrix $V$ is an <em>n</em>$\times$<em>n</em> matrix. The matrix $U$ and $V$ satisefy $U^TU=I$ and $V^TV=I$. The following image can express the decomposition clearly.</p>
 
 </div>
 </div>
@@ -426,7 +422,7 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>I want to give an easy example that can represent the process of PCA clearly and understandably.</p>
+<p>We want to give an easy example that can represent the process of PCA clearly and understandably.</p>
 <p>Assume we have a matrix $X$ = $\left\lgroup\begin{matrix}-1 &amp; -1 &amp; 0 &amp; 2 &amp; 0 \cr -2 &amp; 0 &amp; 0 &amp; 1 &amp; 1\end{matrix}\right\rgroup$, we want to use PCA to make the $2$-dimension data to $1$-dimension.</p>
 
 </div>
@@ -696,35 +692,6 @@ $$</p>
 </div>
 </div>
 </div>
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-julia"><pre><span></span><span class="n">Y</span> <span class="o">=</span> <span class="n">P</span><span class="o">*</span><span class="n">X</span>
-<span class="n">Y</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">:</span><span class="p">]</span>
-<span class="k">using</span> <span class="n">Plots</span>
-<span class="n">p</span> <span class="o">=</span> <span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">:</span><span class="p">],</span><span class="n">X</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="o">:</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="s">"raw points"</span><span class="p">)</span>
-<span class="n">plot!</span><span class="p">(</span><span class="o">-</span><span class="mi">3</span><span class="o">:</span><span class="mf">0.01</span><span class="o">:</span><span class="mi">3</span><span class="p">,</span> <span class="n">x</span><span class="o">-&gt;</span><span class="n">x</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">"projection plane"</span><span class="p">)</span>
-<span class="n">raw_p</span> <span class="o">=</span> <span class="kt">Tuple</span><span class="o">.</span><span class="p">([[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">],[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">]])</span>
-<span class="n">proj_p</span> <span class="o">=</span> <span class="kt">Tuple</span><span class="o">.</span><span class="p">([[</span><span class="o">-</span><span class="mf">1.5</span><span class="p">,</span><span class="o">-</span><span class="mf">1.5</span><span class="p">],[</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="o">-</span><span class="mf">0.5</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],[</span><span class="mf">1.5</span><span class="p">,</span><span class="mf">1.5</span><span class="p">]])</span>
-<span class="n">scatter!</span><span class="p">(</span><span class="n">proj_p</span><span class="p">,</span> <span class="n">opacity</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s">"pink"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">"proj_points"</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span> <span class="kp">in</span> <span class="mi">1</span><span class="o">:</span><span class="mi">5</span>
-    <span class="n">plot!</span><span class="p">(</span><span class="n">p</span><span class="p">,[</span><span class="n">raw_p</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">proj_p</span><span class="p">[</span><span class="n">i</span><span class="p">]],</span><span class="n">arrow</span><span class="o">=</span><span class="n">arrow</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s">"purple"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s">""</span><span class="p">)</span>
-<span class="k">end</span>
-<span class="n">p</span>
-<span class="n">savefig</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="s">"pca-example.png"</span><span class="p">);</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    
-
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -736,8 +703,8 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Relationship-between-SVD-and-PCA">
-<a class="anchor" href="#Relationship-between-SVD-and-PCA" aria-hidden="true"><span class="octicon octicon-link"></span></a>Relationship between SVD and PCA<a class="anchor-link" href="#Relationship-between-SVD-and-PCA"> </a>
+<h2 id="Connections-between-SVD-and-PCA">
+<a class="anchor" href="#Connections-between-SVD-and-PCA" aria-hidden="true"><span class="octicon octicon-link"></span></a>Connections between SVD and PCA<a class="anchor-link" href="#Connections-between-SVD-and-PCA"> </a>
 </h2>
 </div>
 </div>
@@ -761,11 +728,76 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Write-the-mathematical-process-in-relation-csdn.">
-<a class="anchor" href="#Write-the-mathematical-process-in-relation-csdn." aria-hidden="true"><span class="octicon octicon-link"></span></a>Write the mathematical process in relation csdn.<a class="anchor-link" href="#Write-the-mathematical-process-in-relation-csdn."> </a>
-</h4>
+<h3 id="Mathematical-Relations-behind-PCA-and-SVD">
+<a class="anchor" href="#Mathematical-Relations-behind-PCA-and-SVD" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mathematical Relations behind PCA and SVD<a class="anchor-link" href="#Mathematical-Relations-behind-PCA-and-SVD"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this part, we want to verify two conclusions:</p>
+<ul>
+<li>There are square relationships between singular values and eigen values</li>
+<li>The results of singular value decomposition and eigenvalue decomposition of covariance matrix are consistent</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Firstly, we will verify the first conclusion. We want to get some interesting relationships about covariance matrix $\frac{1}{n}X^TX$, but we only focus on parts of the matrix($X^TX$) for convenience. According to the definition of sigular value decompsition: $X = U\Sigma V^T$, we can get that $$X^TX = V\Sigma U^TU\Sigma V^T = V\Sigma^2V^T = V\Sigma^2V^{-1}.$$ And we know that $X^TX$ is a symmetric positive semidefinite matrix, so it can be eigendecompsed as
+$$
+X^TX = V\Lambda V^{-1}.
+$$
+We can find that the two formula are consistent. And when the order of eigenvalues is assigned, we can easily find that $$\Lambda = \Sigma^2.$$</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Given an SVD of matrix $X$($X = U\Sigma V^T$), we know that 1)The columns of $V$(right singular vectors) are eigenvectors of $X^TX$; 2)The columns of $U$(left singular vectors) are eigenvectors of $XX^T$. If you do not know this, you can refer to <a href="https://en.wikipedia.org/wiki/Singular_value_decomposition#Relation_to_eigenvalue_decomposition">https://en.wikipedia.org/wiki/Singular_value_decomposition#Relation_to_eigenvalue_decomposition</a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Bearing the above two in the mind, we can make SVD on $X^TX$. Given that $X^TX = U_2\Sigma_2V_2^T$, we can know that $U_2$ is just the eigenvectors of $X^TXX^TX$(we can write the new matrix as $(X^TX)(X^TX)^T$).Then we can get that:
+$$
+X^TXX^TX = U_2\Sigma_2V_2^T(U_2\Sigma_2V_2^T)^T = U_2\Sigma_2^2U_2^T
+$$
+And according to eigendecompsition, we can get that $X^TX = V_2\Lambda_2V_2^{-1}$, so for the new matrix, we can get that:
+$$
+X^TXX^TX = V_2\Lambda_2^2V_2^{-1}
+$$
+Easily, we can find that $U_2=V_2$ and $\Sigma_2^2 = \Lambda_2^2$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Based on the verification that the SVD has the same result as eigen decompsition of convariance matrix, we can do <strong>PCA based on SVD</strong>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Implementation-of-PCA-Based-on-SVD">
+<a class="anchor" href="#Implementation-of-PCA-Based-on-SVD" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation of PCA Based on SVD<a class="anchor-link" href="#Implementation-of-PCA-Based-on-SVD"> </a>
+</h3>
 <blockquote>
-<p><a href="https://blog.csdn.net/Dark_Scope/article/details/53150883">https://blog.csdn.net/Dark_Scope/article/details/53150883</a></p>
+<p>Based on Sigular Values</p>
 </blockquote>
 
 </div>
@@ -774,11 +806,18 @@ $$</p>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There is another interesting aspect deserves exploration. We can find that PCA only use the right singular matrix $V$ of SVD, so we may ask whether the left one is useless. The answer is definitely no. We can assume a sample data matrix which is <em>m</em> $\times$ <em>n</em>. Then we find the left singular matrix $U$ using the $k$ eigenvectors of matrix $\frac{1}{n}XX^T$ from SVD, then we can a new matrix $X^l$:
-$$
-X^l_{k\times n} = U^T_{k\times m}X_{m\times n}
-$$
-We can easily find that the new matrix $X^l$ has the rows from $m$ to $k$ compared to the raw matrix $X$. So we can get the conclusion that the left singular matrix can condense the rows number while the right singular matrix can condense the columns which is often used in PCA.</p>
+<p>The implementation process is not difficult.
+Input: dataset $X$ = {$x_1$, $x_2$, $cdots$, $x_n$}
+Target: Reduce the dimensions from $n$ to $k$
+Process:</p>
+<ul>
+<li>Centralization</li>
+<li>Calculate the covariance matrix</li>
+<li>Calculate the eigenvectors and eigenvalues <strong>based on SVD</strong>
+</li>
+<li>Sort eigenvalues from large to small and choose the first $k$ largest eigenvalues and corresponding eigenvectors.</li>
+<li>Make the dataset into the new $k$ dimensions space via linear transfromation</li>
+</ul>
 
 </div>
 </div>
@@ -786,7 +825,311 @@ We can easily find that the new matrix $X^l$ has the rows from $m$ to $k$ compar
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Generally speaking, SVD creates a square matrix via constructing the original data matrix A and the expression ${A^{T}} \cdot A$.</p>
+<p>There is another interesting aspect deserves exploration. We can find that PCA only use the left singular matrix $U$ of SVD
+$$
+X^l_{k\times n} = U^T_{k\times m}X_{m\times n}
+$$
+We can easily find that the new matrix $X^l$ condenses the rows from $m$ to $k$ compared to the raw matrix $X$. So we can get the conclusion that the left singular matrix can condense the rows number. This is what <strong>PCA based on eigenvalues</strong> does. 
+So we may ask whether the right one is useless. The answer is definitely no. We can assume the same sample data matrix which is <em>m</em> $\times$ <em>n</em>. Then we find the right singular matrix $V$ using the $k$ eigenvectors of matrix $\frac{1}{n}XX^T$ from SVD, then we can a new matrix $X^r$:
+$$
+X^r_{m\times k} = X_{m\times n}V^T_{n\times k}
+$$
+In this case, the right singular matrix can reduce dimensions for columns. When we use SVD to decompose covariance matrix to realize PCA (<strong>PCA based on SVD</strong>), and we can get PCA dimension reduction in two directions (row and column).</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we want to use a diagram to illustrate the connections between SVD and PCA.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/relation.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Real-life-Applications-of-SVD-and-PCA">
+<a class="anchor" href="#Real-life-Applications-of-SVD-and-PCA" aria-hidden="true"><span class="octicon octicon-link"></span></a>Real-life Applications of SVD and PCA<a class="anchor-link" href="#Real-life-Applications-of-SVD-and-PCA"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this part, We want to show applications of the SVD and PCA. The applications will include a mathematical example which calculates a simple matrix, iris dataset examples which use first three features for plotting a 3-d image and first two features for comparison, and vivid image processing examples. We hope you can have fun in this part.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="A-Simple-Matrix-Example">
+<a class="anchor" href="#A-Simple-Matrix-Example" aria-hidden="true"><span class="octicon octicon-link"></span></a>A Simple Matrix Example<a class="anchor-link" href="#A-Simple-Matrix-Example"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The raw matrix is $\left\lgroup\begin{matrix}-2 &amp; -1 &amp; 0 &amp; 2 &amp; 1 \cr 2 &amp; 2 &amp; 0 &amp; -1 &amp; -1 \cr 2 &amp; 0 &amp; 1 &amp; 1 &amp; 0 \end{matrix}\right\rgroup$. Then we will do the basic PCA(based on eigendecomposition) to this data and choose two most important features, and we can get the result reduced matrix. In the process, we can easily calculate the <em>covariance matrix</em> <code>cov_Mat</code>, then we just use the basic algorithm of PCA which is using the eigen decomposition to get the <em>eigenvalues</em> $\Lambda$ and <em>eigenvectors</em> $V$. We will <em>rearrange</em> the eigenvectors and eigenvalues. For eigenvalues, we will choose eigenvalues by component or rate, then we can get the corresponding eigenvectors. Lastly, we can do some data transfromation to get the output data. And we can see the results using this PCA based on eigendecomposition:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/mat_pcaeig.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we want to do PCA based on SVD on the same raw matrix. Thanks to Scikit-learn, we can just use the <code>PCA</code> function and choose the component=2 and then use <code>fit!</code> to fit the pca model. Lastly, we can get the output data.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/mat_pcasvd.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The last method is direct SVD. We just use the <code>svd</code> function to get the right sigular vector matrix $U$, the left sigular vector matrix $V$ and the sigular value matrix $\Sigma$. Then we can choose how many factors we need to use in this decomposition. Lastly, we can transform data to get the output result.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/mat_svd.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see that the SVD and PCA methods generally have the same result for simple data, the three methods are all feasible.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Iris-Dataset-Examples">
+<a class="anchor" href="#Iris-Dataset-Examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Iris Dataset Examples<a class="anchor-link" href="#Iris-Dataset-Examples"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this part, We will use the <code>iris</code> dataset as examples. We will use the same dataset to do two things. The first is that we can see the 3-d result(instead of just on a plane) vividly via choosing three features. The second is that we want to do the normal things: choose two features of iris dataset and use different methods to compare results.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Firstly, I want to use the <code>MultivariateStats</code> package in <code>julia</code> which contains <code>PCA</code> function to do the dimension reduction operation. I choose the first 3 principal components and then use <code>scatter</code> and <code>plot</code> functions in <code>Plots</code> package to show a 3-d diagram.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>PCA</code> function in <code>MultivariateStats</code> package has two core algorithms: <code>pcacov</code> and <code>pcasvd</code>. From the names, we can see that one algorithm uses the eigendecomposition of covariance matrix and the other one just uses SVD. The two algorithms have different parameters, the <code>PCA</code> function will call different algorithms based on different parameters. <code>pcacov</code> function has param <code>C</code> for covariance matrix and param <code>mean</code> for the mean vector of original samples. <code>pcasvd</code> function has param <code>Z</code> for centralized samples and param <code>mean</code> for the mean vector of original samples. For detailed information about this package, you can refer to: <a href="https://multivariatestatsjl.readthedocs.io/en/latest/pca.html">https://multivariatestatsjl.readthedocs.io/en/latest/pca.html</a> .</p>
+<p>And we can see the 3-d plot with first three principle features.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/iris_3d.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we want to choose the first two principle features and use PCA(based on SVD), PCA(based on eigendecomposition) and direct SVD methods. We can see the four plots vividly.</p>
+<p>To make the algorithms diversity, we use the PCA <strong>based on SVD</strong> so that we can directly call the <code>PCA</code> function in <code>sklearn.decomposition</code>. For the PCA <strong>based on eigendecomposition</strong>, we need to caculate the <em>covariance matrix</em>. For direct SVD, we can use <code>svd</code> function to get the needed matrices $U$, $\Sigma$ and $V$.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/PCA&amp;SVD_iris.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Image-Processing-Examples">
+<a class="anchor" href="#Image-Processing-Examples" aria-hidden="true"><span class="octicon octicon-link"></span></a>Image Processing Examples<a class="anchor-link" href="#Image-Processing-Examples"> </a>
+</h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This part is very interesting. We first use the direct SVD method to an <code>.png</code> image file, and we will choose different features to see the results of image compression. Then as normal, we will use SVD and PCA to one image and see the results of different methods.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following image is an image with 800$\times$512 pixels. We want to know how to work with color channels to explore image compression using the SVD. We can see that the details including the colors, outlines and so on are very clear in this raw image.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/dog.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We know that the raw image above is 800$\times$512, which means that the raw image has at most 512 sigular values. Then we want to choose 10, 50 ,100 singular values respectively and get the according results compared with the raw image. We use the <code>map</code> function in <code>julia</code> language to choose different sigular values and use <code>mosaicview</code> function to show the results including the raw image in the first place. The result is shown as below:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/res_dog.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It is not difficult to find that the compressed image is very fuzzy when choosing only 10 singular values. The outlines and the patterns of the lovely dog cannot be dealt with clearly, which means that the first 10 singular values cannot closely represent the whole information of the raw image. When we choose 50 singular images, we can see that the ouline of the dog is only a little fuzzy. And when we choose 100 singular values, we find it is very close to the raw image. That is to say, we can only use 100 singular values instead of 512 total to represent to dog image which means that less space to store the needed information and less time to deal with the related information. Without doubt, SVD is very useful and successful in image compression.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Then we will do the same step as the previous examples. We want to compare the results of SVD and PCA to the same image. The <code>cat.png</code> image file is a cat with a mask, it is 1200$\times$1200 pixels. We use direct SVD method and PCA <strong>based on eigendecompostion</strong> method to compress the raw image. To make the problem simple, we transfer the <code>RGB</code> image to <code>Gray</code> image.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/cat.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can see that the two images on the first row are the raw image and the corresponding gray image. Then we just get the matrices $U$, $V$ and $\Sigma$ via the embedded function <code>SVD</code>. When it comes to PCA methods, we use the covariance matrix and calculate the eigenvalues and eigenvectors. We can see that both compressed images represetnt the raw gray image very well.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/image-compre.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To explore deeper about the difference of SVD and PCA, we write another function to calculate how many corresponding values(singular values in SVD, eigenvalues in PCA) can represent 90% cumulative contribution rate for the raw gray image in different methods. We need 384 eigenvalues in PCA while we only need 362 singular values in SVD. So it is not difficult to summarize that the SVD method will do better on image compression on the same level.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="/Data1010Project/images/copied_from_nb/images/im_comp_1.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Summary">
+<a class="anchor" href="#Summary" aria-hidden="true"><span class="octicon octicon-link"></span></a>Summary<a class="anchor-link" href="#Summary"> </a>
+</h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>This blog clarifies the methematical theories behind SVD and PCA using some formula. We just give some simple derivation process like how to caculate the singular matrix and singlar values in SVD and how to get the eigenvalues and eigenvectors of covariance matrix in PCA. If you want to explore deeper and wider, you can click on the links, I think they are very useful.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A very important topic in this blog is that there are two main algorithms of PCA. One is PCA based on eigendecomposition which uses covariance matrix and the other is PCA based on SVD which uses singular values and singular vectors. Because the basic PCA based on eigendecomposition cannot do as well as the PCA based on SVD in general, so some embedded <code>PCA</code> functions like <code>PCA</code> in <code>MultivariateStats</code> and <code>PCA</code> in <code>sklearn.decomposition</code> both use PCA <strong>based on SVD</strong> which is verified more effective and efficient.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The most interesting part of this blog is the vivid examples. We illustrate examples using simple matrix, iris dataset and some images. We hope you can find the connections and differences between different methods. Hope you can understand easily with the help of these diagrams.</p>
 
 </div>
 </div>
