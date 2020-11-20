@@ -21,6 +21,22 @@
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/Data1010Project/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://gfreya.github.io/Data1010Project/feed.xml" title="My Data-Science Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data1010Project/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
 
 <script>
 function wrap_img(fn) {
@@ -215,11 +231,7 @@ window.onload = wrap_img;
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>We first review the definitions of eigenvalues and eigenvectors as follows: $Ax = \lambda x$. In this formula, $A$ is an <em>n</em> $\times$ <em>n</em> real symmetric matrix, and $x$ is a vector of dimension n, then we say that $\lambda$ is an eigenvalue of matrix $A$, and $x$ is the eigenvector corresponding to the eigenvalue of matrix $A$. After we know the according eigenvalues and eigenvectors, we can do eigendecompositionn to the matrix $A$. Now we have n eigenvalues of matrix $A$: $\lambda_1 \leq \lambda_2 \leq \cdots \leq \lambda_n$ and the according eigenvectors {$v_1,v_2,\cdots,v_n$}, if the n eigenvectors are linearly independent, then the matrix can be eigendecomposed as $A = V\Lambda V^{-1}$.</p>
 <p>$V$ is an <em>n</em>$\times$<em>n</em> matrix composed of the n eigenvectors and $\Lambda$ is the <em>n</em>$\times$<em>n</em> matrix with n eigenvalues on its main diagonal. Generaly, we will normalize the n eigenvectors in matrix $V$, namely satisefying $||v_i||_2 = 1$, or $v_i^T v_i = 1$. At this time, the eigenvectors of $V$ are the standard orthogonal bases, satisefying $V^TV=I$, namely $V^T = V^{-1}$. Then we can rewrite the eigendecomposition of matrix $A$: $A = V\Lambda V^T$.</p>
-<p>If you want to learn more about the process of eigendecompsition, please refer to</p>
-<blockquote>
-<p>DataGymnasia:<a href="https://mathigon.org/course/linear-algebra/eigenanalysis">https://mathigon.org/course/linear-algebra/eigenanalysis</a>
-To clarify one important point of eigendecomposition: the matrix $A$ must be a square matrix. So another question comes up: if the matrix $A$ is not a square matrix which means that the numbers of columns and rows are not the same, can we decompose the matrix $A$? The answer is definitely yes, and it just introduces the main topic SVD(singular value decomposition).</p>
-</blockquote>
+<p>To clarify one important point of eigendecomposition: the matrix $A$ must be a square matrix. So another question comes up: if the matrix $A$ is not a square matrix which means that the numbers of columns and rows are not the same, can we decompose the matrix $A$? The answer is definitely yes, and it just introduces the main topic SVD(singular value decomposition).</p>
 
 </div>
 </div>
@@ -263,17 +275,6 @@ $$
 A = U\Sigma V^T \Rightarrow A^T = V\Sigma^T U^T \Rightarrow A^TA = V\Sigma^T U^T U \Sigma V^T = V\Sigma^2V^T
 $$
 From the above formula, we can see that $U^TU=I$ and $\Sigma^T\Sigma = \Sigma^2$. Similarly, we can get that the eigenvectors matrix equals to the square of singular value vectors matrix which means we can know the relationship between the eigenvalues and singular values: $\sigma_i = \sqrt{\lambda_i}$.</p>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>If you want to learn more about the process of SVD, please refer to</p>
-<blockquote>
-<p>DataGymnasia:<a href="https://mathigon.org/course/linear-algebra/singular-value-decomposition">https://mathigon.org/course/linear-algebra/singular-value-decomposition</a></p>
-</blockquote>
 
 </div>
 </div>
@@ -355,7 +356,7 @@ $k$ is much smaller than $n$, so the large target matrix $A$ can be represented 
 <a class="anchor" href="#Derivation-and-Calculation-of-PCA" aria-hidden="true"><span class="octicon octicon-link"></span></a>Derivation and Calculation of PCA<a class="anchor-link" href="#Derivation-and-Calculation-of-PCA"> </a>
 </h3>
 <blockquote>
-<p>Based on Eigenvalues</p>
+<p>Based on Eigendecomposition</p>
 </blockquote>
 
 </div>
@@ -364,7 +365,7 @@ $k$ is much smaller than $n$, so the large target matrix $A$ can be represented 
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>Assume we have $m$ $n$-dimension data $(x_1, x_2, \cdots, x_m$ with centralization, which means that the sum of the $m$ data is $0$. All $m$ data satisefy that $\sum_{i=1}^{m}{x_i}$=$0$. Also, we can assume that the new coordinate system with the bases after the projection transformation will be {$\boldsymbol {w_1, w_2, \cdots, w_n}$}, and $\boldsymbol w$ is the orthonormal basis. What we want to do in PCA is to reduce the dimensions from $n$ to $k$, which means that we need to drop some useless coordinates and create a new coordinate system {$\boldsymbol {w_1, w_2, \cdots, w_k}$}. Then one of the sample data $x_i$ will have the expression for its projection in this $k$-dimension coordinate system: $p_i$ = $(p_{i1}, p_{i2}, \cdots, p_{ik})^T$, and $p_{ij}$=$w_j^T x_i$ which means that the it is the coordinate of $x_i$ in the $j$th dimension of the original $n$-dimension coordinate system, namely $w_j$.</p>
+<p>Assume we have $m$ $n$-dimension data $(x_1, x_2, \cdots, x_m)$ with centralization, which means that the sum of the $m$ data is $0$. All $m$ data satisefy that $\sum_{i=1}^{m}{x_i}$=$0$. Also, we can assume that the new coordinate system with the bases after the projection transformation will be {$\boldsymbol {w_1, w_2, \cdots, w_n}$}, and $\boldsymbol w$ is the orthonormal basis. What we want to do in PCA is to reduce the dimensions from $n$ to $k$, which means that we need to drop some useless coordinates and create a new coordinate system {$\boldsymbol {w_1, w_2, \cdots, w_k}$}. Then one of the sample data $x_i$ will have the expression for its projection in this $k$-dimension coordinate system: $p_i$ = $(p_{i1}, p_{i2}, \cdots, p_{ik})^T$, and $p_{ij}$=$w_j^T x_i$ which means that the it is the coordinate of $x_i$ in the $j$th dimension of the original $n$-dimension coordinate system, namely $w_j$.</p>
 
 </div>
 </div>
@@ -413,7 +414,7 @@ $$</p>
 <a class="anchor" href="#Mathematical-Example-of-PCA" aria-hidden="true"><span class="octicon octicon-link"></span></a>Mathematical Example of PCA<a class="anchor-link" href="#Mathematical-Example-of-PCA"> </a>
 </h3>
 <blockquote>
-<p>Based on Eigenvalues</p>
+<p>Based on Eigendecomposition</p>
 </blockquote>
 
 </div>
@@ -467,7 +468,7 @@ $$</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Make sure the target matrix is centralization.</li>
+<li>Make sure the target matrix is de-meaned.</li>
 </ul>
 
 </div>
@@ -797,7 +798,7 @@ Easily, we can find that $U_2=V_2$ and $\Sigma_2^2 = \Lambda_2^2$.</p>
 <a class="anchor" href="#Implementation-of-PCA-Based-on-SVD" aria-hidden="true"><span class="octicon octicon-link"></span></a>Implementation of PCA Based on SVD<a class="anchor-link" href="#Implementation-of-PCA-Based-on-SVD"> </a>
 </h3>
 <blockquote>
-<p>Based on Sigular Values</p>
+<p>Based on Sigular Value Decomposition</p>
 </blockquote>
 
 </div>
@@ -807,11 +808,14 @@ Easily, we can find that $U_2=V_2$ and $\Sigma_2^2 = \Lambda_2^2$.</p>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>The implementation process is not difficult.
-Input: dataset $X$ = {$x_1$, $x_2$, $cdots$, $x_n$}
+<br>
+Input: dataset $X$ = {$x_1$, $x_2$, $\cdots$, $x_n$}
+<br>
 Target: Reduce the dimensions from $n$ to $k$
+<br>
 Process:</p>
 <ul>
-<li>Centralization</li>
+<li>De-meaned</li>
 <li>Calculate the covariance matrix</li>
 <li>Calculate the eigenvectors and eigenvalues <strong>based on SVD</strong>
 </li>
@@ -825,12 +829,11 @@ Process:</p>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>There is another interesting aspect deserves exploration. We can find that PCA only use the left singular matrix $U$ of SVD
+<p>There is another interesting aspect deserves exploration. We can explore meanings of left singular matrix $U$ and right singular matrix $V$.
 $$
 X^l_{k\times n} = U^T_{k\times m}X_{m\times n}
 $$
-We can easily find that the new matrix $X^l$ condenses the rows from $m$ to $k$ compared to the raw matrix $X$. So we can get the conclusion that the left singular matrix can condense the rows number. This is what <strong>PCA based on eigenvalues</strong> does. 
-So we may ask whether the right one is useless. The answer is definitely no. We can assume the same sample data matrix which is <em>m</em> $\times$ <em>n</em>. Then we find the right singular matrix $V$ using the $k$ eigenvectors of matrix $\frac{1}{n}XX^T$ from SVD, then we can a new matrix $X^r$:
+We can easily find that the new matrix $X^l$ condenses the rows from $m$ to $k$ compared to the raw matrix $X$. So we can get the conclusion that the left singular matrix can condense the rows number. For the matrix $V$, we can assume the same sample data matrix which is <em>m</em> $\times$ <em>n</em>. Then we find the right singular matrix $V$ using the $k$ eigenvectors of matrix $\frac{1}{n}XX^T$ from SVD, then we can a new matrix $X^r$:
 $$
 X^r_{m\times k} = X_{m\times n}V^T_{n\times k}
 $$
@@ -1072,7 +1075,7 @@ In this case, the right singular matrix can reduce dimensions for columns. When 
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>We can see that the two images on the first row are the raw image and the corresponding gray image. Then we just get the matrices $U$, $V$ and $\Sigma$ via the embedded function <code>SVD</code>. When it comes to PCA methods, we use the covariance matrix and calculate the eigenvalues and eigenvectors. We can see that both compressed images represetnt the raw gray image very well.</p>
+<p>We can see that the two images on the first row are the raw image and the corresponding gray image. Then we just get the matrices $U$, $V$ and $\Sigma$ via the embedded function <code>svd()</code>. When it comes to PCA methods, we use the covariance matrix and calculate the eigenvalues and eigenvectors. We can see that both compressed images represetnt the raw gray image very well.</p>
 
 </div>
 </div>
